@@ -5,6 +5,9 @@
 PRODUCT_SOONG_NAMESPACES += \
     vendor/qualcomm/sdm455_64
 
+# Inherit fragments
+$(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-camera.mk)
+
 PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/bin/wfdservice:$(TARGET_COPY_OUT_SYSTEM)/bin/wfdservice \
     vendor/qualcomm/sdm455_64/proprietary/etc/cne/Nexus/ATT/ATT_profiles.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/cne/Nexus/ATT/ATT_profiles.xml \
