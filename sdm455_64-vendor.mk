@@ -236,22 +236,6 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/perf/targetresourceconfigs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/targetresourceconfigs.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891M04.drc:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891M04.drc \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891M04.vstep:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891M04.vstep \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891R04.drc:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891R04.drc \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891R04.vstep:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891R04.vstep \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891S04.drc:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891S04.drc \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891S04.vstep:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891S04.vstep \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891V04.drc:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891V04.drc \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/T9891V04.vstep:$(TARGET_COPY_OUT_VENDOR)/firmware/T9891V04.vstep \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TAS2557MSSMono.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/TAS2557MSSMono.bin \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TFA9891.cnt:$(TARGET_COPY_OUT_VENDOR)/firmware/TFA9891.cnt \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TFA9891.cnt_preformat.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/TFA9891.cnt_preformat.ini \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TFA9891.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/TFA9891.ini \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TFA9891.speaker:$(TARGET_COPY_OUT_VENDOR)/firmware/TFA9891.speaker \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TFA9891N1A_Dec2015.config:$(TARGET_COPY_OUT_VENDOR)/firmware/TFA9891N1A_Dec2015.config \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TFA9891_N1A_11_1_31_NL3_HQ.patch:$(TARGET_COPY_OUT_VENDOR)/firmware/TFA9891_N1A_11_1_31_NL3_HQ.patch \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/TP_Firmware_FT8716.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/TP_Firmware_FT8716.bin \
     vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/a225_pfp.fw:$(TARGET_COPY_OUT_VENDOR)/firmware/a225_pfp.fw \
     vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/a225_pm4.fw:$(TARGET_COPY_OUT_VENDOR)/firmware/a225_pm4.fw \
     vendor/qualcomm/sdm455_64/proprietary/vendor/firmware/a225p5_pm4.fw:$(TARGET_COPY_OUT_VENDOR)/firmware/a225p5_pm4.fw \
