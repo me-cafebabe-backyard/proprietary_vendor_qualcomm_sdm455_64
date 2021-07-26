@@ -7,6 +7,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Inherit fragments
 $(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-camera.mk)
+$(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-hbtp.mk)
 
 PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/bin/wfdservice:$(TARGET_COPY_OUT_SYSTEM)/bin/wfdservice \
