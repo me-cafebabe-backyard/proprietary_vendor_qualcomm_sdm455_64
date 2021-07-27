@@ -6,6 +6,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qualcomm/sdm455_64
 
 # Inherit fragments
+$(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-audio.mk)
 $(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-camera.mk)
 $(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-hbtp.mk)
 
