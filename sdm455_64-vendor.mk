@@ -5,11 +5,6 @@
 PRODUCT_SOONG_NAMESPACES += \
     vendor/qualcomm/sdm455_64
 
-# Inherit fragments
-$(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-audio.mk)
-$(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-camera.mk)
-$(call inherit-product, vendor/qualcomm/sdm455_64/sdm455_64-vendor-hbtp.mk)
-
 PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/bin/wfdservice:$(TARGET_COPY_OUT_SYSTEM)/bin/wfdservice \
     vendor/qualcomm/sdm455_64/proprietary/etc/cne/Nexus/ATT/ATT_profiles.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/cne/Nexus/ATT/ATT_profiles.xml \
@@ -130,6 +125,7 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/cnss-daemon:$(TARGET_COPY_OUT_VENDOR)/bin/cnss-daemon \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/dpmQmiMgr:$(TARGET_COPY_OUT_VENDOR)/bin/dpmQmiMgr \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/energy-awareness:$(TARGET_COPY_OUT_VENDOR)/bin/energy-awareness \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/bin/hbtp_daemon:$(TARGET_COPY_OUT_VENDOR)/bin/hbtp_daemon \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/hvdcp_opti:$(TARGET_COPY_OUT_VENDOR)/bin/hvdcp_opti \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti:$(TARGET_COPY_OUT_VENDOR)/bin/hw/android.hardware.bluetooth@1.0-service-qti \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/hw/android.hardware.drm@1.2-service.widevine:$(TARGET_COPY_OUT_VENDOR)/bin/hw/android.hardware.drm@1.2-service.widevine \
@@ -151,6 +147,7 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/lowi-server:$(TARGET_COPY_OUT_VENDOR)/bin/lowi-server \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/mlid:$(TARGET_COPY_OUT_VENDOR)/bin/mlid \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/mm-pp-dpps:$(TARGET_COPY_OUT_VENDOR)/bin/mm-pp-dpps \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/bin/mm-qcamera-app:$(TARGET_COPY_OUT_VENDOR)/bin/mm-qcamera-app \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/msm_irqbalance:$(TARGET_COPY_OUT_VENDOR)/bin/msm_irqbalance \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/netmgrd:$(TARGET_COPY_OUT_VENDOR)/bin/netmgrd \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/pd-mapper:$(TARGET_COPY_OUT_VENDOR)/bin/pd-mapper \
@@ -173,16 +170,6 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/xtra-daemon:$(TARGET_COPY_OUT_VENDOR)/bin/xtra-daemon \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/xtwifi-client:$(TARGET_COPY_OUT_VENDOR)/bin/xtwifi-client \
     vendor/qualcomm/sdm455_64/proprietary/vendor/bin/xtwifi-inet-agent:$(TARGET_COPY_OUT_VENDOR)/bin/xtwifi-inet-agent \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/audio_platform_info_extcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_extcodec.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/audio_platform_info_skush.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_skush.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_i2s.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_i2s.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_mtp.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_skush.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_skush.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_skus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_skus.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_wcd9326.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_wcd9326.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_wcd9335.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_wcd9335.xml \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_wcd9340.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_wcd9340.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/acdbdata/MTP/MTP_General_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/MTP/MTP_General_cal.acdb \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/MTP/MTP_Global_cal.acdb \
@@ -224,6 +211,58 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Headset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Headset_cal.acdb \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Speaker_cal.acdb \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_workspaceFile.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_workspaceFile.qwsp \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/audio_platform_info_extcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_extcodec.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/audio_platform_info_skush.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_skush.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/camera_config.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/csidtg_camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/csidtg_camera.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/csidtg_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/csidtg_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx214_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx214_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx230_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx230_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx230_qc2002_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx230_qc2002_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx230_qc2002_with_gyro_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx230_qc2002_with_gyro_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx258_bear_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx258_bear_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx258_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx258_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx258_lc898217xc_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx258_lc898217xc_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx258_mono_bear_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx258_mono_bear_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx258_mono_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx258_mono_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx298_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx298_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx298_gt24c64_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx298_gt24c64_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx318_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx318_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx362_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx362_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx362_chromatix_bear.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx362_chromatix_bear.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx362_gt24c64a_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx362_gt24c64a_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx376_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx376_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/imx378_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/imx378_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov12a10_bear_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov12a10_bear_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov12a10_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov12a10_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov13850_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov13850_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov13850_q13v06k_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov13850_q13v06k_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov13855_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov13855_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov13880_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov13880_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov2281_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov2281_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov2680_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov2680_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov4688_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov4688_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov5670_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov5670_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov5670_f5670bq_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov5670_f5670bq_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov5695_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov5695_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov7251_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov7251_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov8856_bear_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov8856_bear_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov8856_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov8856_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov8858_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov8858_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/ov8865_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/ov8865_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k2l7_8953_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k2l7_8953_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k2l7_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k2l7_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k2l7sx_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k2l7sx_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3l8_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3l8_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3l8_f3l8yam_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3l8_f3l8yam_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3l8_mono_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3l8_mono_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3m2xm_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3m2xm_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3m2xm_chromatix_bear.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3m2xm_chromatix_bear.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3m2xx_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3m2xx_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3m3sm_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3m3sm_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3p3sm_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3p3sm_chromatix.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/camera/s5k3p8sp_chromatix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/s5k3p8sp_chromatix.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/cne/wqeclient/ATT/ATT_profile1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/cne/wqeclient/ATT/ATT_profile1.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/cne/wqeclient/ATT/ATT_profile2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/cne/wqeclient/ATT/ATT_profile2.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/cne/wqeclient/ATT/ATT_profile3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/cne/wqeclient/ATT/ATT_profile3.xml \
@@ -253,6 +292,16 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/cne/wqeclient/VZW/VZW_profile6.xml:$(TARGET_COPY_OUT_VENDOR)/etc/cne/wqeclient/VZW/VZW_profile6.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/data/dsi_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/data/dsi_config.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/data/netmgr_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/data/netmgr_config.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/hbtpcfg.dat:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/hbtpcfg.dat \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/hbtpcfg2.dat:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/hbtpcfg2.dat \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/hbtpcfg_adsp_800s_fhd.dat:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/hbtpcfg_adsp_800s_fhd.dat \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/hbtpcfg_sdm630_800s_fhd.dat:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/hbtpcfg_sdm630_800s_fhd.dat \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/hbtpcfg_sdm660_800h_qhd.dat:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/hbtpcfg_sdm660_800h_qhd.dat \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/hbtpcfg_sdm660_800s_qhd.dat:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/hbtpcfg_sdm660_800s_qhd.dat \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/loader.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/loader.cfg \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/qtc800h.bin:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/qtc800h.bin \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/qtc800h_8998_660.bin:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/qtc800h_8998_660.bin \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/hbtp/qtc800s_dsp.bin:$(TARGET_COPY_OUT_VENDOR)/etc/hbtp/qtc800s_dsp.bin \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.bluetooth@1.0-service-qti.rc \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/init/android.hardware.drm@1.2-service.widevine.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.drm@1.2-service.widevine.rc \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc \
@@ -276,6 +325,13 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/init/vendor.qti.hardware.perf@2.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.hardware.perf@2.0-service.rc \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_i2s.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_i2s.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_mtp.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_skus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_skus.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_skush.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_skush.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_wcd9326.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_wcd9326.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_wcd9335.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_wcd9335.xml \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/etc/mixer_paths_wcd9340.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_wcd9340.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/perf/commonresourceconfigs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/commonresourceconfigs.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml \
     vendor/qualcomm/sdm455_64/proprietary/vendor/etc/perf/targetconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/targetconfig.xml \
@@ -373,6 +429,7 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/hw/android.hardware.gnss@2.0-impl-qti.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/android.hardware.gnss@2.0-impl-qti.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/hw/camera.sdm660.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/camera.sdm660.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/hw/sound_trigger.primary.sdm660.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/sound_trigger.primary.sdm660.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/hw/vendor.qti.gnss@3.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/vendor.qti.gnss@3.0-impl.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/hw/vendor.qti.hardware.fm@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/vendor.qti.hardware.fm@1.0-impl.so \
@@ -414,12 +471,37 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libQSEEComAPI.so:$(TARGET_COPY_OUT_VENDOR)/lib/libQSEEComAPI.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libRSDriver_adreno.so:$(TARGET_COPY_OUT_VENDOR)/lib/libRSDriver_adreno.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libStDrvInt.so:$(TARGET_COPY_OUT_VENDOR)/lib/libStDrvInt.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libacdb-fts.so:$(TARGET_COPY_OUT_VENDOR)/lib/libacdb-fts.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libacdbloader.so:$(TARGET_COPY_OUT_VENDOR)/lib/libacdbloader.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libacdbrtac.so:$(TARGET_COPY_OUT_VENDOR)/lib/libacdbrtac.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_ad5823.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_ad5823.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_ak7371.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_ak7371.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_bu64244gwz.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_bu64244gwz.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_dw9714.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_dw9714.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_dw9716.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_dw9716.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_dw9763b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_dw9763b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_dw9790a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_dw9790a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_dw9800.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_dw9800.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_lc898212xd_qc2002.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_lc898212xd_qc2002.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_pseudo.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_pseudo.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libactuator_rohm_bu64243gwz.so:$(TARGET_COPY_OUT_VENDOR)/lib/libactuator_rohm_bu64243gwz.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadiertac.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadiertac.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadm.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadm.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadpcmdec.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadpcmdec.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadreno_utils.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadreno_utils.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadsp_default_listener.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadsp_default_listener.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadsp_hvx_callback_skel.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadsp_hvx_callback_skel.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadsp_hvx_stub.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadsp_hvx_stub.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libadsprpc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libadsprpc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libaudcal.so:$(TARGET_COPY_OUT_VENDOR)/lib/libaudcal.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libbatching.so:$(TARGET_COPY_OUT_VENDOR)/lib/libbatching.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libbccQTI.so:$(TARGET_COPY_OUT_VENDOR)/lib/libbccQTI.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libbt-hidlclient.so:$(TARGET_COPY_OUT_VENDOR)/lib/libbt-hidlclient.so \
@@ -427,6 +509,1159 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libc2d30_bltlib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libc2d30_bltlib.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libcdsp_default_listener.so:$(TARGET_COPY_OUT_VENDOR)/lib/libcdsp_default_listener.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libcdsprpc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libcdsprpc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_csidtg_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_csidtg_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_csidtg_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_csidtg_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_csidtg_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_csidtg_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_csidtg_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_csidtg_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_csidtg_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_csidtg_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_4k_preview_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_4k_preview_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_4k_video_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_4k_video_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_default_preview_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_default_preview_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_default_video_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_default_video_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hdr_snapshot_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hdr_snapshot_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hdr_video_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hdr_video_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hfr_120_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hfr_120_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hfr_60_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hfr_60_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_hfr_90_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_hfr_90_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_zsl_preview_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_zsl_preview_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx214_zsl_video_lc898122.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx214_zsl_video_lc898122.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_1080p_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_1080p_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_1080p_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_1080p_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_4k_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_4k_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_4k_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_4k_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_raw_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_raw_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_snapshot_downscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_snapshot_downscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_snapshot_upscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_snapshot_upscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_default_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_default_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_default_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_default_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hdr_snapshot_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hdr_snapshot_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hdr_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hdr_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_120_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_120_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_240_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_240_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_60_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_60_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_hfr_90_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_hfr_90_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_1080p_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_1080p_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_1080p_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_1080p_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_4k_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_4k_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_4k_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_4k_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_default_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_default_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_default_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_default_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hdr_snapshot_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hdr_snapshot_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hdr_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hdr_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_120_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_120_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_240_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_240_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_60_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_60_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_hfr_90_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_hfr_90_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_video_16M_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_video_16M_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_1080p_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_1080p_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_1080p_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_1080p_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_4k_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_4k_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_4k_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_4k_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_default_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_default_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_default_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_default_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hdr_snapshot_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hdr_snapshot_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hdr_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hdr_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_120_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_120_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_240_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_240_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_60_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_60_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_hfr_90_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_hfr_90_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_video_16M_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_video_16M_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_zsl_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_zsl_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_with_gyro_zsl_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_with_gyro_zsl_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_zsl_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_zsl_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_qc2002_zsl_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_qc2002_zsl_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_raw_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_raw_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_raw_hdr_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_raw_hdr_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_video_16M_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_video_16M_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_zsl_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_zsl_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx230_zsl_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx230_zsl_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_4k_preview_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_4k_preview_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_4k_video_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_4k_video_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_default_preview_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_default_preview_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_default_video_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_default_video_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_hfr_120_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_hfr_120_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_hfr_60_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_hfr_60_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_hfr_90_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_hfr_90_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_zsl_preview_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_zsl_preview_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_bear_zsl_video_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_bear_zsl_video_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_lc898217xc_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_lc898217xc_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_4k_preview_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_4k_preview_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_4k_video_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_4k_video_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_default_preview_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_default_preview_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_default_video_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_default_video_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_hfr_120_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_hfr_120_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_hfr_60_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_hfr_60_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_hfr_90_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_hfr_90_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_zsl_preview_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_zsl_preview_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_bear_zsl_video_lc898217xc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_bear_zsl_video_lc898217xc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_mono_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_mono_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx258_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx258_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_4K_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_4K_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_4K_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_4K_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_4K_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_4K_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_4K_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_4K_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hdr_snapshot_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hdr_snapshot_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hdr_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hdr_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_bear_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_bear_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hdr_snapshot_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hdr_snapshot_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hdr_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hdr_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx298_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx298_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_1080p_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_1080p_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_1080p_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_1080p_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_4k_12M_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_4k_12M_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_4k_12M_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_4k_12M_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_4k_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_4k_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_4k_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_4k_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_1080p_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_1080p_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_1080p_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_1080p_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_4k_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_4k_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_4k_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_4k_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_fullsize_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_fullsize_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_fullsize_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_fullsize_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_hfr_120_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_hfr_120_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_hfr_240_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_hfr_240_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_hfr_60_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_hfr_60_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_bear_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_bear_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_snapshot_raw_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_snapshot_raw_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_cpp_video_4k_raw_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_cpp_video_4k_raw_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_full_snapshot_raw_hdr_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_full_snapshot_raw_hdr_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_fullsize_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_fullsize_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_fullsize_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_fullsize_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_hfr_120_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_hfr_120_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_hfr_240_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_hfr_240_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_hfr_60_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_hfr_60_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_qtrsize_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_qtrsize_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_qtrsize_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_qtrsize_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_snapshot_raw_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_snapshot_raw_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_snapshot_raw_hdr_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_snapshot_raw_hdr_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_video_12M_raw_hdr_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_video_12M_raw_hdr_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_video_4k_raw_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_video_4k_raw_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx318_video_raw_hdr_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx318_video_raw_hdr_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_1080p_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_1080p_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_1080p_preview_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_1080p_preview_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_1080p_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_1080p_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_1080p_video_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_1080p_video_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_4k_preview_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_4k_preview_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_4k_video_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_4k_video_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_common_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_common_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_hfr_120_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_hfr_120_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_hfr_240_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_hfr_240_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_hfr_60_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_hfr_60_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_liveshot_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_liveshot_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_preview_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_preview_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot_downscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot_downscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot_downscale_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot_downscale_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot_hdr_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot_hdr_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot_upscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot_upscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_snapshot_upscale_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_snapshot_upscale_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_video_4k_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_video_4k_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_video_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_video_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_cpp_video_hdr_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_cpp_video_hdr_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_default_preview_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_default_preview_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_default_video_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_default_video_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_default_video_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_default_video_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_fullsize_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_fullsize_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_fullsize_preview_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_fullsize_preview_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_fullsize_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_fullsize_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_fullsize_video_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_fullsize_video_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_1080p_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_1080p_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_1080p_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_1080p_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_snapshot_downscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_snapshot_downscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_snapshot_upscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_snapshot_upscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_fullsize_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_fullsize_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_fullsize_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_fullsize_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hdr_snapshot_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hdr_snapshot_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hdr_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hdr_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hfr_240_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hfr_240_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_gt24c64a_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_gt24c64a_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hdr_snapshot_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hdr_snapshot_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hdr_snapshot_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hdr_snapshot_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hdr_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hdr_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hdr_video_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hdr_video_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_120_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_120_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_120_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_120_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_240_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_240_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_240_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_240_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_240_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_240_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_60_3a_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_60_3a_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_hfr_60_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_hfr_60_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_postproc_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_postproc_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_preview_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_preview_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_snapshot_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_snapshot_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_snapshot_hdr_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_snapshot_hdr_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_video_4k_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_video_4k_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx362_video_hdr_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx362_video_hdr_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_cpp_snapshot_downscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_cpp_snapshot_downscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_cpp_snapshot_upscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_cpp_snapshot_upscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_cpp_video_default.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_cpp_video_default.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_fullsize_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_fullsize_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_fullsize_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_fullsize_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx376_video_default.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx376_video_default.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_4K_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_4K_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_4K_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_4K_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_cpp_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_cpp_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hdr_snapshot_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hdr_snapshot_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hdr_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hdr_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_240.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_240.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_240_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_240_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_snapshot_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_snapshot_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_video_hdr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_video_hdr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_imx378_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_imx378_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_default_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_default_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_bear_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_bear_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_default_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_default_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov12a10_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov12a10_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_cpp_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_cpp_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_default_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_default_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_default_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_default_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_hfr_120_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_hfr_120_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_hfr_60_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_hfr_60_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_hfr_90_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_hfr_90_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_cpp_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_cpp_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_default_preview_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_default_preview_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_default_video_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_default_video_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_hfr_120_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_hfr_120_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_hfr_60_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_hfr_60_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_hfr_90_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_hfr_90_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_zsl_preview_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_zsl_preview_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_q13v06k_zsl_video_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_q13v06k_zsl_video_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_zsl_preview_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_zsl_preview_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13850_zsl_video_lc898212xd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13850_zsl_video_lc898212xd.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_cpp_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_cpp_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_default_preview_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_default_preview_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_default_video_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_default_video_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_hfr_120_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_hfr_120_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_hfr_60_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_hfr_60_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_hfr_90_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_hfr_90_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_zsl_preview_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_zsl_preview_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13855_zsl_video_bu64297.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13855_zsl_video_bu64297.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_default_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_default_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_hfr_120_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_hfr_120_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_hfr_90_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_hfr_90_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov13880_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov13880_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_a3_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_a3_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_a3_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_a3_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov2281_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov2281_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_hfr_120_ad5823.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_hfr_120_ad5823.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_hfr_60_ad5823.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_hfr_60_ad5823.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_hfr_90_ad5823.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_hfr_90_ad5823.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_zsl_preview_ad5823.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_zsl_preview_ad5823.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov4688_zsl_video_ad5823.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov4688_zsl_video_ad5823.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_a3_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_a3_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_a3_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_a3_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_a3_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_a3_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_a3_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_a3_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_a3_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_a3_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_cpp_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_cpp_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_a3_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_a3_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_a3_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_a3_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_a3_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_a3_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_a3_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_a3_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_a3_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_a3_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_cpp_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_cpp_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_f5670bq_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_f5670bq_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov5670_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov5670_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov7251_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov7251_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_a3_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_a3_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_a3_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_a3_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_a3_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_a3_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_a3_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_a3_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_a3_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_a3_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_3a_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_3a_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_3a_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_3a_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_3a_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_3a_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_3a_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_3a_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_3a_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_3a_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_bear_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_bear_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8856_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8856_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_a3_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_a3_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_a3_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_a3_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_a3_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_a3_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_a3_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_a3_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_a3_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_a3_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_a3_default_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_a3_default_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_a3_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_a3_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_a3_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_a3_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_a3_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_a3_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_a3_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_a3_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_bear_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_bear_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8858_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8858_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_ds_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_ds_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_us_chromatix.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_us_chromatix.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_cpp_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_cpp_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_default_preview_dw9714.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_default_preview_dw9714.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_default_video_dw9714.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_default_video_dw9714.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_hfr_120_dw9714.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_hfr_120_dw9714.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_hfr_60_dw9714.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_hfr_60_dw9714.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_hfr_90_dw9714.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_hfr_90_dw9714.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_video_full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_video_full.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_ov8865_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_ov8865_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_hfr_60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_hfr_60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k2l7sx_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k2l7sx_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_default_preview_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_default_preview_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_default_video_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_default_video_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_default_preview_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_default_preview_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_default_video_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_default_video_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_hfr_120_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_hfr_120_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_hfr_60_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_hfr_60_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_hfr_90_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_hfr_90_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_zsl_preview_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_zsl_preview_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_f3l8yam_zsl_video_dw9763.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_f3l8yam_zsl_video_dw9763.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_hfr_120_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_hfr_120_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_hfr_60_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_hfr_60_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_hfr_90_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_hfr_90_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_default_preview_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_default_preview_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_default_video_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_default_video_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_hfr_120_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_hfr_120_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_hfr_60_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_hfr_60_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_hfr_90_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_hfr_90_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_zsl_preview_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_zsl_preview_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_mono_zsl_video_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_mono_zsl_video_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_zsl_preview_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_zsl_preview_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3l8_zsl_video_ak7345.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3l8_zsl_video_ak7345.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_common_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_common_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_hfr_120_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_hfr_120_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_hfr_60_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_hfr_60_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_hfr_90_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_hfr_90_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_liveshot_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_liveshot_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_preview_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_preview_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_snapshot_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_snapshot_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_cpp_video_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_cpp_video_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_default_preview_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_default_preview_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_default_preview_dw9761b_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_default_preview_dw9761b_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_default_video_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_default_video_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_default_video_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_default_video_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_default_video_dw9761b_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_default_video_dw9761b_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_120_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_120_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_120_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_120_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_120_dw9761b_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_120_dw9761b_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_60_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_60_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_60_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_60_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_60_dw9761b_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_60_dw9761b_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_90_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_90_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_90_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_90_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_hfr_90_dw9761b_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_hfr_90_dw9761b_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_liveshot_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_liveshot_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_postproc_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_postproc_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_preview_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_preview_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_snapshot_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_snapshot_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_zsl_preview_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_zsl_preview_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_zsl_preview_dw9761b_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_zsl_preview_dw9761b_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_zsl_video_dw9761b.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_zsl_video_dw9761b.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xm_zsl_video_dw9761b_bear.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xm_zsl_video_dw9761b_bear.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_1080p_preview_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_1080p_preview_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_1080p_video_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_1080p_video_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_4k_preview_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_4k_preview_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_4k_video_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_4k_video_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_snapshot_downscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_snapshot_downscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_snapshot_upscale.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_snapshot_upscale.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_default_preview_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_default_preview_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_default_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_default_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_default_video_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_default_video_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_hfr_120.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_hfr_120.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_hfr_120_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_hfr_120_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_hfr_60_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_hfr_60_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_hfr_90.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_hfr_90.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_hfr_90_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_hfr_90_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_zsl_preview_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_zsl_preview_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m2xx_zsl_video_ad5816g.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m2xx_zsl_video_ad5816g.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_4k_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_4k_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_4k_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_4k_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_cpp_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_cpp_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_cpp_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_cpp_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_default_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_default_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_default_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_default_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_hfr60_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_hfr60_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_hfr_60.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_hfr_60.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_video_4k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_video_4k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_zsl_preview_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_zsl_preview_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3m3sm_zsl_video_3a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3m3sm_zsl_video_3a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_a3_zsl_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_a3_zsl_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_a3_zsl_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_a3_zsl_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_common.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_cpp_liveshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_cpp_liveshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_cpp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_cpp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_cpp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_cpp_snapshot.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_cpp_snapshot_4m.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_cpp_snapshot_4m.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_cpp_video.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_cpp_video.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_postproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_postproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_preview.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_preview.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libchromatix_s5k3p8sp_snapshot.so:$(TARGET_COPY_OUT_VENDOR)/lib/libchromatix_s5k3p8sp_snapshot.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libconfigdb.so:$(TARGET_COPY_OUT_VENDOR)/lib/libconfigdb.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libdataitems.so:$(TARGET_COPY_OUT_VENDOR)/lib/libdataitems.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libdiag.so:$(TARGET_COPY_OUT_VENDOR)/lib/libdiag.so \
@@ -438,6 +1673,7 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libfastcvadsp_stub.so:$(TARGET_COPY_OUT_VENDOR)/lib/libfastcvadsp_stub.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libfastcvopt.so:$(TARGET_COPY_OUT_VENDOR)/lib/libfastcvopt.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libfastrpc_utf_stub.so:$(TARGET_COPY_OUT_VENDOR)/lib/libfastrpc_utf_stub.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libflash_pmic.so:$(TARGET_COPY_OUT_VENDOR)/lib/libflash_pmic.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libgcs-calwrapper.so:$(TARGET_COPY_OUT_VENDOR)/lib/libgcs-calwrapper.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libgcs-ipc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libgcs-ipc.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libgcs-osal.so:$(TARGET_COPY_OUT_VENDOR)/lib/libgcs-osal.so \
@@ -448,14 +1684,20 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libgnsspps.so:$(TARGET_COPY_OUT_VENDOR)/lib/libgnsspps.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libgps.utils.so:$(TARGET_COPY_OUT_VENDOR)/lib/libgps.utils.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libgsl.so:$(TARGET_COPY_OUT_VENDOR)/lib/libgsl.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libhal_dbg.so:$(TARGET_COPY_OUT_VENDOR)/lib/libhal_dbg.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libhbtpclient.so:$(TARGET_COPY_OUT_VENDOR)/lib/libhbtpclient.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libhbtpdsp.so:$(TARGET_COPY_OUT_VENDOR)/lib/libhbtpdsp.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libhbtpfrmwk.so:$(TARGET_COPY_OUT_VENDOR)/lib/libhbtpfrmwk.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libhdr_tm.so:$(TARGET_COPY_OUT_VENDOR)/lib/libhdr_tm.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libidl.so:$(TARGET_COPY_OUT_VENDOR)/lib/libidl.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libizat_client_api.so:$(TARGET_COPY_OUT_VENDOR)/lib/libizat_client_api.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libizat_core.so:$(TARGET_COPY_OUT_VENDOR)/lib/libizat_core.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libjpegdhw.so:$(TARGET_COPY_OUT_VENDOR)/lib/libjpegdhw.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libjpegdmahw.so:$(TARGET_COPY_OUT_VENDOR)/lib/libjpegdmahw.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libjpegehw.so:$(TARGET_COPY_OUT_VENDOR)/lib/libjpegehw.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libkeymasterdeviceutils.so:$(TARGET_COPY_OUT_VENDOR)/lib/libkeymasterdeviceutils.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libkeymasterprovision.so:$(TARGET_COPY_OUT_VENDOR)/lib/libkeymasterprovision.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libkeymasterutils.so:$(TARGET_COPY_OUT_VENDOR)/lib/libkeymasterutils.so \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqtikeymaster4.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqtikeymaster4.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/liblbs_core.so:$(TARGET_COPY_OUT_VENDOR)/lib/liblbs_core.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libllvm-glnext.so:$(TARGET_COPY_OUT_VENDOR)/lib/libllvm-glnext.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libllvm-qcom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libllvm-qcom.so \
@@ -472,7 +1714,175 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libminksocket.so:$(TARGET_COPY_OUT_VENDOR)/lib/libminksocket.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmm-color-convertor.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmm-color-convertor.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmm-hdcpmgr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmm-hdcpmgr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmm-qcamera.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmm-qcamera.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_c2d_module.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_c2d_module.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_cpp_module.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_cpp_module.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_frame_algorithm.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_frame_algorithm.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_iface_modules.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_iface_modules.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_imglib_modules.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_imglib_modules.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_is.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_is.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_isp_modules.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_isp_modules.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_mct.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_mct.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_mct_shimlayer.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_mct_shimlayer.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_pp_buf_mgr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_pp_buf_mgr.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_pproc_modules.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_pproc_modules.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_q3a_core.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_q3a_core.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_sensor_modules.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_sensor_modules.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_stats_algorithm.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_stats_algorithm.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_stats_lib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_stats_lib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera2_stats_modules.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera2_stats_modules.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_atmel_at24c32e_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_atmel_at24c32e_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_bokeh.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_bokeh.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_csidtg.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_csidtg.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_dbg.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_dbg.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_depth_map.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_depth_map.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_dummyalgo.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_dummyalgo.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_dw9761b_2d_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_dw9761b_2d_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_eebinparse.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_eebinparse.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_eeprom_util.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_eeprom_util.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_eztune_module.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_eztune_module.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_facedetection_lib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_facedetection_lib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_faceproc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_faceproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_faceproc2.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_faceproc2.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_hdr_gb_lib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_hdr_gb_lib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_hvx_add_constant.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_hvx_add_constant.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_hvx_grid_sum.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_hvx_grid_sum.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imglib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imglib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imglib_faceproc_adspstub.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imglib_faceproc_adspstub.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx214.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx214.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx230.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx230.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx258.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx258.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx258_gt24c16_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx258_gt24c16_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx258_gt24c32_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx258_gt24c32_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx258_mono.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx258_mono.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx258_mono_gt24c32_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx258_mono_gt24c32_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx298.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx298.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx318.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx318.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx362.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx362.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx362_gt24c64a.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx362_gt24c64a.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx376.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx376.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_imx378.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_imx378.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_interface.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_interface.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_irs1645.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_irs1645.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_abf48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_abf48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_aec_bg_stats47.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_aec_bg_stats47.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_bf_stats47.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_bf_stats47.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_bg_stats46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_bg_stats46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_bhist_stats44.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_bhist_stats44.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_black_level48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_black_level48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_bpc48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_bpc48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_cac47.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_cac47.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_chroma_enhan40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_chroma_enhan40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_chroma_suppress40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_chroma_suppress40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_clamp_encoder40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_clamp_encoder40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_clamp_video40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_clamp_video40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_clamp_viewfinder40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_clamp_viewfinder40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_color_correct46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_color_correct46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_color_xform_encoder46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_color_xform_encoder46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_color_xform_video46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_color_xform_video46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_color_xform_viewfinder46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_color_xform_viewfinder46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_cs_stats46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_cs_stats46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_demosaic48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_demosaic48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_demux48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_demux48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_fovcrop_encoder46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_fovcrop_encoder46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_fovcrop_video46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_fovcrop_video46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_fovcrop_viewfinder46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_fovcrop_viewfinder46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_gamma44.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_gamma44.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_gic48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_gic48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_gtm46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_gtm46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_hdr48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_hdr48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_hdr_be_stats46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_hdr_be_stats46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_hdr_bhist_stats44.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_hdr_bhist_stats44.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_ihist_stats46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_ihist_stats46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_linearization40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_linearization40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_ltm47.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_ltm47.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_luma_adaptation40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_luma_adaptation40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_mce40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_mce40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_mesh_rolloff44.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_mesh_rolloff44.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_pdaf48.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_pdaf48.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_pedestal_correct46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_pedestal_correct46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_rs_stats46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_rs_stats46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_scaler_encoder46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_scaler_encoder46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_scaler_video46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_scaler_video46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_scaler_viewfinder46.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_scaler_viewfinder46.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_sce40.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_sce40.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_snr47.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_snr47.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_isp_sub_module.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_isp_sub_module.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_le2464c_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_le2464c_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_le2464c_master_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_le2464c_master_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_m24c64s_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_m24c64s_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ofilm_ohs0443_ov12a10_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ofilm_ohs0443_ov12a10_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ofilm_ohs0443_ov13880_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ofilm_ohs0443_ov13880_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_onsemi_cat24c16_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_onsemi_cat24c16_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_onsemi_cat24c32_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_onsemi_cat24c32_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_onsemi_cat24c32_imx362_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_onsemi_cat24c32_imx362_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov12a10.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov12a10.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov13850.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov13850.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov13850_q13v06k.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov13850_q13v06k.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov13855.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov13855.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov13880.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov13880.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov2281.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov2281.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov2680.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov2680.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov2685.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov2685.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov2685_scv3b4035.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov2685_scv3b4035.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov4188.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov4188.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov4688.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov4688.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov4688_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov4688_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov5645.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov5645.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov5670.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov5670.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov5695.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov5695.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov7251.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov7251.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov8856.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov8856.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov8856_2lane.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov8856_2lane.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov8856_4lane.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov8856_4lane.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov8858.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov8858.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ov8865.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ov8865.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_paaf_lib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_paaf_lib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_pdaf.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_pdaf.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_pdafcamif.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_pdafcamif.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ppbase_module.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ppbase_module.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_ppeiscore.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_ppeiscore.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_qtech_f3l8yam_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_qtech_f3l8yam_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_qtech_f5670bq_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_qtech_f5670bq_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_quadracfa.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_quadracfa.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_rohm_brcg064gwz_3_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_rohm_brcg064gwz_3_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k2l7.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k2l7.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k2l7sx.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k2l7sx.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k3l8.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k3l8.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k3l8_mono.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k3l8_mono.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k3m2xm.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k3m2xm.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k3m2xx.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k3m2xx.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k3m3sm.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k3m3sm.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k3p3sm.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k3p3sm.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_s5k3p8sp.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_s5k3p8sp.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sat_test_lib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sat_test_lib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sony_imx214_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sony_imx214_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sony_imx298_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sony_imx298_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sony_imx378_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sony_imx378_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sonyimx135_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sonyimx135_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_8865_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_8865_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_gt24c64_imx298_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_gt24c64_imx298_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_gt24c64_s5k2l7_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_gt24c64_s5k2l7_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_gt24c64_s5k2l7sx_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_gt24c64_s5k2l7sx_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_gt24c64a_imx362_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_gt24c64a_imx362_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_gt24c64a_imx376_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_gt24c64a_imx376_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_ov13855_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_ov13855_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_q13v06k_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_q13v06k_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sunny_q5v41b_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sunny_q5v41b_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_sw2d_lib.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_sw2d_lib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_thread_services.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_thread_services.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_tintless_algo.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_tintless_algo.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_tintless_bg_pca_algo.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_tintless_bg_pca_algo.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_truly_cma481_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_truly_cma481_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_truly_cmb433_eeprom.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_truly_cmb433_eeprom.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_tuning.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_tuning.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmcamera_tuning_lookup.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmcamera_tuning_lookup.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmjpeg.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmjpeg.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmjpeg_interface.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmjpeg_interface.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmlib2d_interface.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmlib2d_interface.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmosal_proprietary.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmosal_proprietary.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmqjpeg_codec.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmqjpeg_codec.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libmmqjpegdma.so:$(TARGET_COPY_OUT_VENDOR)/lib/libmmqjpegdma.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libnetmgr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libnetmgr.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libnetmgr_common.so:$(TARGET_COPY_OUT_VENDOR)/lib/libnetmgr_common.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libnetmgr_nr_fusion.so:$(TARGET_COPY_OUT_VENDOR)/lib/libnetmgr_nr_fusion.so \
@@ -499,13 +1909,20 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqmi_csi.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqmi_csi.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqmi_encdec.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqmi_encdec.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqmiservices.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqmiservices.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqomx_core.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqomx_core.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqomx_jpegdec.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqomx_jpegdec.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqomx_jpegenc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqomx_jpegenc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqomx_jpegenc_pipe.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqomx_jpegenc_pipe.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqrtr.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqrtr.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqseed3.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqseed3.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqsocket.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqsocket.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqti-perfd-client.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqti-perfd-client.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqti-perfd.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqti-perfd.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqti-util.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqti-util.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqtigef.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqtigef.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libqtikeymaster4.so:$(TARGET_COPY_OUT_VENDOR)/lib/libqtikeymaster4.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/librcc.so:$(TARGET_COPY_OUT_VENDOR)/lib/librcc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libremosaic_daemon.so:$(TARGET_COPY_OUT_VENDOR)/lib/libremosaic_daemon.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/libril-qc-ltedirectdisc.so:$(TARGET_COPY_OUT_VENDOR)/lib/libril-qc-ltedirectdisc.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/librpmb.so:$(TARGET_COPY_OUT_VENDOR)/lib/librpmb.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/librs_adreno.so:$(TARGET_COPY_OUT_VENDOR)/lib/librs_adreno.so \
@@ -551,6 +1968,10 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/rfsa/adsp/libvpp_svc_skel.so:$(TARGET_COPY_OUT_VENDOR)/lib/rfsa/adsp/libvpp_svc_skel.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/sensor_calibrate.so:$(TARGET_COPY_OUT_VENDOR)/lib/sensor_calibrate.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/sensors.ssc.so:$(TARGET_COPY_OUT_VENDOR)/lib/sensors.ssc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/soundfx/libasphere.so:$(TARGET_COPY_OUT_VENDOR)/lib/soundfx/libasphere.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/soundfx/libqcbassboost.so:$(TARGET_COPY_OUT_VENDOR)/lib/soundfx/libqcbassboost.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/soundfx/libqcreverb.so:$(TARGET_COPY_OUT_VENDOR)/lib/soundfx/libqcreverb.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/soundfx/libqcvirt.so:$(TARGET_COPY_OUT_VENDOR)/lib/soundfx/libqcvirt.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.gnss@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.gnss@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.gnss@1.1.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.gnss@1.1.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.gnss@1.2.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.gnss@1.2.so \
@@ -558,6 +1979,8 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.gnss@2.1.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.gnss@2.1.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.hardware.bluetooth_sar@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.hardware.bluetooth_sar@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.hardware.fm@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.hardware.fm@1.0.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.hardware.qteeconnector@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.hardware.qteeconnector@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.hardware.radio.am@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.hardware.radio.am@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib/vendor.qti.hardware.radio.atcmdfwd@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/vendor.qti.hardware.radio.atcmdfwd@1.0.so \
@@ -681,6 +2104,9 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libgnsspps.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgnsspps.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libgps.utils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgps.utils.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libgsl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgsl.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libhbtpclient.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhbtpclient.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libhbtpdsp.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhbtpdsp.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libhbtpfrmwk.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhbtpfrmwk.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libhdr_tm.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhdr_tm.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libidl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libidl.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libizat_client_api.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libizat_client_api.so \
@@ -688,7 +2114,6 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libkeymasterdeviceutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymasterdeviceutils.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libkeymasterprovision.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymasterprovision.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libkeymasterutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymasterutils.so \
-    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libqtikeymaster4.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libqtikeymaster4.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/liblbs_core.so:$(TARGET_COPY_OUT_VENDOR)/lib64/liblbs_core.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libllvm-glnext.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libllvm-glnext.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libllvm-qcom.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libllvm-qcom.so \
@@ -704,6 +2129,16 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libminkdescriptor.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libminkdescriptor.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libminksocket.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libminksocket.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmm-color-convertor.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmm-color-convertor.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera2_frame_algorithm.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera2_frame_algorithm.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera2_is.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera2_is.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera2_q3a_core.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera2_q3a_core.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera2_stats_algorithm.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera2_stats_algorithm.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera2_stats_lib.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera2_stats_lib.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera_dbg.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera_dbg.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera_faceproc.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera_faceproc.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera_faceproc2.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera_faceproc2.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera_tintless_algo.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera_tintless_algo.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmcamera_tintless_bg_pca_algo.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmcamera_tintless_bg_pca_algo.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libmmosal_proprietary.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmmosal_proprietary.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libnetmgr.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libnetmgr.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libnetmgr_common.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libnetmgr_common.so \
@@ -737,6 +2172,7 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libqti-perfd-client.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libqti-perfd-client.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libqti-perfd.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libqti-perfd.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libqti-util.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libqti-util.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libqtikeymaster4.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libqtikeymaster4.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/librcc.so:$(TARGET_COPY_OUT_VENDOR)/lib64/librcc.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libril-qc-hal-qmi.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libril-qc-hal-qmi.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/libril-qc-ltedirectdisc.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libril-qc-ltedirectdisc.so \
@@ -796,6 +2232,8 @@ PRODUCT_COPY_FILES += \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.data.latency@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.data.latency@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.data.qmi@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.data.qmi@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.fm@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.fm@1.0.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so \
+    vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.qteeconnector@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.qteeconnector@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.radio.am@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.radio.am@1.0.so \
     vendor/qualcomm/sdm455_64/proprietary/vendor/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so \
